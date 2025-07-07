@@ -20,18 +20,16 @@ package org.wso2.carbon.identity.rest.api.server.claim.management.v1.dto;
 
 import io.swagger.annotations.ApiModel;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import org.wso2.carbon.identity.rest.api.server.claim.management.v1.dto.AttributeMappingDTO;
-import org.wso2.carbon.identity.rest.api.server.claim.management.v1.dto.ProfilesDTO;
-import org.wso2.carbon.identity.rest.api.server.claim.management.v1.dto.PropertyDTO;
+
 import io.swagger.annotations.*;
 import com.fasterxml.jackson.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 
-    /**
+/**
     * Local claim request.
     **/
 @ApiModel(description = "Local claim request.")
@@ -64,6 +62,15 @@ public class LocalClaimReqDTO {
     private Boolean supportedByDefault = null;
 
     @Valid
+    private DataType dataType = null;
+
+    @Valid
+    private String[] subAttributes = null;
+
+    @Valid
+    private LabelValueDTO[] canonicalValues = null;
+
+    @Valid
     private Boolean multiValued = null;
 
     public enum UniquenessScopeEnum {
@@ -88,6 +95,9 @@ public class LocalClaimReqDTO {
 
     @Valid 
     private ProfilesDTO profiles = null;
+
+    @Valid
+    private InputFormatDTO inputFormat = null;
 
     /**
     * A unique URI specific to the claim.
@@ -186,6 +196,48 @@ public class LocalClaimReqDTO {
     }
 
     /**
+     * Specifies the type of data which the claim holds.
+     **/
+    @ApiModelProperty(value = "Specifies the type of data stored in the corresponding claim value.")
+    @JsonProperty("dataType")
+    public DataType getDataType() {
+
+        return dataType;
+    }
+    public void setDataType(DataType dataType) {
+
+        this.dataType = dataType;
+    }
+
+    /**
+     * The sub attributes of the complex attribute.
+     **/
+    @ApiModelProperty(value = "The sub attributes of the complex attribute.")
+    @JsonProperty("subAttributes")
+    public String[] getSubAttributes() {
+
+        return subAttributes != null ? subAttributes.clone() : new String[0];
+    }
+    public void setSubAttributes(String[] subAttributes) {
+
+        this.subAttributes = subAttributes != null ? subAttributes.clone() : null;
+    }
+
+    /**
+     * The possible values for the attribute.
+     **/
+    @ApiModelProperty(value = "The possible values for the attribute.")
+    @JsonProperty("canonicalValues")
+    public LabelValueDTO[] getCanonicalValues() {
+
+        return canonicalValues != null ? canonicalValues.clone() : new LabelValueDTO[0];
+    }
+    public void setCanonicalValues(LabelValueDTO[] canonicalValues) {
+
+        this.canonicalValues = canonicalValues != null ? canonicalValues.clone() : null;
+    }
+
+    /**
      * Specifies if the claim can hold multiple values.
      **/
     @ApiModelProperty(value = "Specifies if the claim can hold multiple values.")
@@ -258,6 +310,15 @@ public class LocalClaimReqDTO {
         this.profiles = profiles;
     }
 
+    @ApiModelProperty(value = "The input format of the attribute.")
+    @JsonProperty("inputFormat")
+    public InputFormatDTO getInputFormat() {
+        return inputFormat;
+    }
+    public void setInputFormat(InputFormatDTO inputFormat) {
+        this.inputFormat = inputFormat;
+    }
+
     @Override
     public String toString() {
 
@@ -272,12 +333,16 @@ public class LocalClaimReqDTO {
         sb.append("    regEx: ").append(regEx).append("\n");
         sb.append("    required: ").append(required).append("\n");
         sb.append("    supportedByDefault: ").append(supportedByDefault).append("\n");
+        sb.append("    dataType: ").append(dataType).append("\n");
+        sb.append("    subAttributes: ").append(Arrays.toString(subAttributes)).append("\n");
+        sb.append("    canonicalValues: ").append(Arrays.toString(canonicalValues)).append("\n");
         sb.append("    multiValued: ").append(multiValued).append("\n");
         sb.append("    uniquenessScope: ").append(uniquenessScope).append("\n");
         sb.append("    sharedProfileValueResolvingMethod: ").append(sharedProfileValueResolvingMethod).append("\n");
         sb.append("    attributeMapping: ").append(attributeMapping).append("\n");
         sb.append("    properties: ").append(properties).append("\n");
         sb.append("    profiles: ").append(profiles).append("\n");
+        sb.append("    inputFormat: ").append(inputFormat).append("\n");
         
         sb.append("}\n");
         return sb.toString();

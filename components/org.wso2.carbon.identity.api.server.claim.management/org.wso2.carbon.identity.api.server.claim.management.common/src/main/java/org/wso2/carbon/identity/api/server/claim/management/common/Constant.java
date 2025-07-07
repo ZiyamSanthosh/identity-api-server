@@ -218,7 +218,31 @@ public class Constant {
         ERROR_CODE_UNAUTHORIZED_ORG_FOR_EXCLUDED_USER_STORES_PROPERTY_UPDATE("CMT-60011",
                 "Unable to update excluded user stores property.",
                 "Updating the excluded user stores property for userstore: %s is not allowed for this " +
-                        "organization");
+                        "organization"),
+        ERROR_CODE_SYSTEM_ATTRIBUTE_MULTIVALUED_STATE_UPDATE("CMT-60012", "Cannot update the multi-valued " +
+                "state of system attributes.", "The multi-valued attribute metadata is not allowed to be " +
+                "modified for system attributes."),
+        ERROR_CODE_SYSTEM_ATTRIBUTE_DATA_TYPE_UPDATE("CMT-60013", "Cannot update the data type of system " +
+                "attributes.", "The data type attribute metadata is not allowed to be modified for system " +
+                "attributes."),
+        ERROR_CODE_SUB_ATTRIBUTES_NOT_SPECIFIED("CMT-60014", "Sub attributes not specified.",
+                "Sub attributes cannot be empty when the data type is complex."),
+        ERROR_CODE_SUB_ATTRIBUTES_NOT_SCIM_COMPLIANT("CMT-60015", "Sub attributes SCIM mappings are not " +
+                "compatible with the attribute.", "Sub attribute %s SCIM mapping should be in the " +
+                "form of attribute + '.' + sub attribute"),
+        ERROR_CODE_ATTRIBUTES_MARKED_AS_SUB_ATTRIBUTES_NOT_ALLOWED_TO_HAVE_SUB_ATTRIBUTES("CMT-60016",
+                "The attributes marked as sub attribute of another attribute can't have sub attributes.",
+                "This attribute is marked as sub attribute of the attribute %s"),
+        ERROR_CODE_UNSUPPORTED_INPUT_TYPE("CMT-60017",
+                "The provided input type doesn't match with the configured attribute meta data.",
+                "The provided input type: %s doesn't match with the configured attribute meta data."),
+        ERROR_CODE_BOOLEAN_ATTRIBUTE_CANNOT_BE_MULTI_VALUED("CMT-60018",
+                "Boolean attributes cannot be multi-valued.",
+                "The attribute: %s is a boolean attribute and cannot be multi-valued."),
+        ERROR_CODE_CANONICAL_VALUES_NOT_SUPPORTED_FOR_NON_STRING_DATA_TYPES("CMT-60019",
+                "Canonical values are only supported for string data type.",
+                "The attribute: %s is not a string data type and canonical values are only supported for " +
+                        "string data type.");
 
         private final String code;
         private final String message;
@@ -290,11 +314,39 @@ public class Constant {
     public static final String PROP_REG_EX = "RegEx";
     public static final String PROP_REQUIRED = "Required";
     public static final String PROP_SUPPORTED_BY_DEFAULT = "SupportedByDefault";
+    public static final String PROP_DATA_TYPE = "dataType";
+    public static final String PROP_SUB_ATTRIBUTES = "subAttributes";
+    public static final String PROP_CANONICAL_VALUES = "canonicalValues";
+    public static final String PROP_INPUT_FORMAT = "inputFormat";
+
     public static final String PROP_MULTI_VALUED = "multiValued";
     public static final String PROP_UNIQUENESS_SCOPE = "UniquenessScope";
     public static final String PROP_PROFILES_PREFIX = "Profiles.";
     public static final String PROP_EXCLUDED_USER_STORES = "ExcludedUserStores";
+    public static final String RETURN_PREVIOUS_ADDITIONAL_PROPERTIES = "Attribute.ReturnPreviousAdditionalProperties";
 
     public static final Set<String> ALLOWED_PROPERTY_KEYS_FOR_SUB_ORG_UPDATE = Collections.unmodifiableSet(
             new HashSet<>(Collections.singletonList(PROP_EXCLUDED_USER_STORES)));
+
+    public static final String INPUT_TYPE_DROPDOWN = "dropdown";
+    public static final String INPUT_TYPE_RADIO_GROUP = "radio_group";
+    public static final String INPUT_TYPE_MULTI_SELECT_DROPDOWN = "multi_select_dropdown";
+    public static final String INPUT_TYPE_CHECKBOX_GROUP = "checkbox_group";
+    public static final String INPUT_TYPE_TEXT_INPUT = "text_input";
+    public static final String INPUT_TYPE_DATE_PICKER = "date_picker";
+    public static final String INPUT_TYPE_NUMBER_INPUT = "number_input";
+    public static final String INPUT_TYPE_CHECKBOX = "checkbox";
+    public static final String INPUT_TYPE_TOGGLE = "toggle";
+    public static final Set<String> ALLOWED_INPUT_TYPES = Collections.unmodifiableSet(
+            new HashSet<String>() { {
+                add(INPUT_TYPE_DROPDOWN);
+                add(INPUT_TYPE_RADIO_GROUP);
+                add(INPUT_TYPE_MULTI_SELECT_DROPDOWN);
+                add(INPUT_TYPE_CHECKBOX_GROUP);
+                add(INPUT_TYPE_TEXT_INPUT);
+                add(INPUT_TYPE_DATE_PICKER);
+                add(INPUT_TYPE_NUMBER_INPUT);
+                add(INPUT_TYPE_CHECKBOX);
+                add(INPUT_TYPE_TOGGLE);
+            } });
 }

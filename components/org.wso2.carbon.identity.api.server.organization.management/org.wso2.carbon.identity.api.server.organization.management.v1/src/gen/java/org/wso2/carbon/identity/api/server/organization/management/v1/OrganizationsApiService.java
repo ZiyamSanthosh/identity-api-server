@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024, WSO2 LLC. (http://www.wso2.com).
+ * Copyright (c) 2025, WSO2 LLC. (http://www.wso2.com).
  *
  * WSO2 LLC. licenses this file to you under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except
@@ -29,10 +29,12 @@ import org.wso2.carbon.identity.api.server.organization.management.v1.model.Erro
 import org.wso2.carbon.identity.api.server.organization.management.v1.model.GetOrganizationResponse;
 import java.util.List;
 import org.wso2.carbon.identity.api.server.organization.management.v1.model.MetaAttributesResponse;
+import org.wso2.carbon.identity.api.server.organization.management.v1.model.OrganizationCheckResponse;
 import org.wso2.carbon.identity.api.server.organization.management.v1.model.OrganizationDiscoveryAttributes;
 import org.wso2.carbon.identity.api.server.organization.management.v1.model.OrganizationDiscoveryCheckPOSTRequest;
 import org.wso2.carbon.identity.api.server.organization.management.v1.model.OrganizationDiscoveryCheckPOSTResponse;
 import org.wso2.carbon.identity.api.server.organization.management.v1.model.OrganizationDiscoveryPostRequest;
+import org.wso2.carbon.identity.api.server.organization.management.v1.model.OrganizationHandleCheckPOSTRequest;
 import org.wso2.carbon.identity.api.server.organization.management.v1.model.OrganizationMetadata;
 import org.wso2.carbon.identity.api.server.organization.management.v1.model.OrganizationNameCheckPOSTRequest;
 import org.wso2.carbon.identity.api.server.organization.management.v1.model.OrganizationNameCheckPOSTResponse;
@@ -49,6 +51,8 @@ import javax.ws.rs.core.Response;
 
 public interface OrganizationsApiService {
 
+      public Response getSelfOrganization();
+
       public Response organizationCheckDiscovery(OrganizationDiscoveryCheckPOSTRequest organizationDiscoveryCheckPOSTRequest);
 
       public Response organizationDiscoveryGet(String organizationId);
@@ -58,6 +62,8 @@ public interface OrganizationsApiService {
       public Response organizationMetadataGet();
 
       public Response organizationPost(OrganizationPOSTRequest organizationPOSTRequest);
+
+      public Response organizationsCheckHandlePost(OrganizationHandleCheckPOSTRequest organizationHandleCheckPOSTRequest);
 
       public Response organizationsCheckNamePost(OrganizationNameCheckPOSTRequest organizationNameCheckPOSTRequest);
 
@@ -78,6 +84,8 @@ public interface OrganizationsApiService {
       public Response organizationsOrganizationIdPatch(String organizationId, List<OrganizationPatchRequestItem> organizationPatchRequestItem);
 
       public Response organizationsOrganizationIdPut(String organizationId, OrganizationPUTRequest organizationPUTRequest);
+
+      public Response patchSelfOrganization(List<OrganizationPatchRequestItem> organizationPatchRequestItem);
 
       public Response shareOrgApplication(String organizationId, String applicationId, ApplicationSharePOSTRequest applicationSharePOSTRequest);
 
